@@ -2,14 +2,30 @@
 
 This package provides TypeScript definitions of WordPress core PHP objects, such as `WP_Error`, `WP_Post`, and `WP_User`.
 
-## Why on earth would I want this?
+## Why would I want this?
 
 If you're writing TypeScript and you're working with a JSON representation of a PHP object from WordPress, it's useful to have a definition for it.
 
-## What about JavaScript objects in WordPress?
+## How is this possible?
 
-This package *might* be extended in the future to provide definitions for JavaScript entities used in WordPress core, but it's not a priority.
+Many classes in WordPress are dumb data stores which expose their properties publicly. This means interfaces can be defined which fit the JSON representation of instances of those classes.
+
+## What else is included?
+
+Some type definitions are included for known possible values of properties, for example the `WP_Post_Type_Name` string enum.
 
 ## Installation
 
-	npm install wp-types --save-dev
+```sh
+npm install wp-types --save-dev
+```
+
+## Usage
+
+```ts
+import { WP_Post } from "wp-types";
+
+function get_title( post: WP_Post ): string {
+	return post.post_title;
+}
+```
