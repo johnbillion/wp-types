@@ -4,6 +4,11 @@
   "description": "TypeScript definitions of WordPress core PHP objects",
   "main": "",
   "types": "index.d.ts",
+  "files": [
+    "interfaces",
+    "types",
+    "index.d.ts"
+  ],
   "homepage": "https://github.com/johnbillion/wp-types",
   "repository": {
     "type": "git",
@@ -14,5 +19,8 @@
     "wordpress"
   ],
   "author": "John Blackbourn",
-  "license": "MIT"
+  "license": "MIT",
+  "peerDependencies": {
+    "typescript": ">=3"
+  }
 }
