@@ -2,7 +2,7 @@
 
 This package provides well-documented TypeScript definitions of WordPress core PHP objects, such as `WP_Error`, `WP_Post`, and `WP_User`.
 
-When you're working with JSON representations of PHP objects from WordPress, it's useful to have definitions for them.
+This means when you're working with JSON representations of PHP objects from WordPress you get definitions for them.
 
 ## What's included?
 
@@ -38,6 +38,40 @@ function get_title( post: WP_Post ): string {
 
 ## FAQs
 
+### When do these definitions apply?
+
+They apply whenever a supported PHP object is represented as JSON. How you do that depends on your application, but here are some examples:
+
+```php
+// get_post() returns a WP_Post or null:
+printf(
+	'let wpPost = %s;',
+	wp_json_encode( get_post() )
+);
+
+// get_userdata() returns a WP_User or false:
+printf(
+	'let wpUser = %s;',
+	wp_json_encode( get_userdata( 123 ) )
+);
+```
+
+*Note:* if you use an object in the data passed to `wp_localize_script()` you need to JSON encode it yourself because the data array of this function only supports scalar values.
+
+```php
+$error = new WP_Error( 'error_code', 'Error Message' );
+
+wp_localize_script(
+	'my_handle',
+	'myData',
+	[
+		'wpError' => wp_json_encode( $error ),
+	]
+);
+```
+
+The definitions also apply outside of the browser of course, for example if you're saving data as JSON and reading it in a Node application.
+
 ### Do these definitions apply to REST API responses?
 
 No. WordPress core objects in REST API responses are of a different shape, but I'm interested in creating definitions for these at some point in the future.
@@ -45,6 +79,10 @@ No. WordPress core objects in REST API responses are of a different shape, but I
 ### Can I use the enums as values in my code?
 
 Not currently. I'm trying to figure it out.
+
+### Why doesn't object X include property Y?
+
+If it's not a public property of the object's class then it won't be included when encoding the object as JSON. You'll need to output it separately.
 
 ### Are these definitions automatically generated from WordPress core?
 
