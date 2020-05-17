@@ -1,8 +1,8 @@
 # WordPress Type Definitions
 
-This package provides well-documented TypeScript definitions of WordPress core PHP objects, such as `WP_Error`, `WP_Post`, and `WP_User`.
+This package provides well-documented TypeScript definitions that describe the shape of WordPress core PHP objects such as `WP_Error`, `WP_Post`, and `WP_User`.
 
-This means when you're working with JSON representations of PHP objects from WordPress you get definitions for them.
+This means when you're working with JSON representations of PHP objects from WordPress you get definitions for their properties and nice documentation in your code editor.
 
 ## What's included?
 
@@ -14,7 +14,7 @@ This means when you're working with JSON representations of PHP objects from Wor
 
 ### Types
 
-String enums are also included for known possible values of some properties:
+String enums are included for known possible values of some properties:
 
 * `WP_Post_Status_Name`
 * `WP_Post_Type_Name`
@@ -56,20 +56,6 @@ printf(
 );
 ```
 
-*Note:* if you use an object in the data passed to `wp_localize_script()` you need to JSON encode it yourself because the data array of this function only supports scalar values.
-
-```php
-$error = new WP_Error( 'error_code', 'Error Message' );
-
-wp_localize_script(
-	'my_handle',
-	'myData',
-	[
-		'wpError' => wp_json_encode( $error ),
-	]
-);
-```
-
 The definitions also apply outside of the browser of course, for example if you're saving data as JSON and reading it in a Node application.
 
 ### Do these definitions apply to REST API responses?
@@ -78,7 +64,7 @@ No. WordPress core objects in REST API responses are of a different shape, but I
 
 ### Can I use the enums as values in my code?
 
-Not currently. I'm trying to figure it out.
+Not currently, but I think this is a transpilation configuration problem in my consuming app. I'm trying to figure it out. Let me know if you can help.
 
 ### Why doesn't object X include property Y?
 
