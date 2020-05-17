@@ -10,6 +10,7 @@ When you're working with JSON representations of PHP objects from WordPress, it'
 
 * `WP_Error`
 * `WP_Post`
+* `WP_User`
 
 ### Types
 
@@ -17,6 +18,7 @@ String enums are also included for known possible values of some properties:
 
 * `WP_Post_Status_Name`
 * `WP_Post_Type_Name`
+* `WP_User_Role`
 
 ## Installation
 
