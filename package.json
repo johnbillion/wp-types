@@ -1,6 +1,6 @@
 {
   "name": "wp-types",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "TypeScript definitions of WordPress core PHP objects",
   "main": "",
   "types": "index.d.ts",
