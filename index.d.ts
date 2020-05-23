@@ -219,7 +219,7 @@ export interface WP_User {
   /**
    * The roles the user is part of.
    */
-  roles: string[];
+  roles: (WP_User_Role_Name | string)[];
 }
 /**
  * A dictionary of user capabilities.
@@ -307,4 +307,11 @@ export enum WP_Post_Type_Name {
   oembed_cache = "oembed_cache",
   user_request = "user_request",
   wp_block = "wp_block",
+}
+export enum WP_User_Role_Name {
+  administrator = "administrator",
+  editor = "editor",
+  author = "author",
+  contributor = "contributor",
+  subscriber = "subscriber",
 }
