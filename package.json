@@ -22,5 +22,14 @@
   "license": "MIT",
   "peerDependencies": {
     "typescript": ">=3"
+  },
+  "devDependencies": {
+    "wp-json-schemas": "0.1.0",
+    "json-schema-to-typescript": "^9.1.0"
+  },
+  "scripts": {
+    "generate": "npm run generate-interfaces && npm run generate-types",
+    "generate-interfaces": "json2ts -i node_modules/wp-json-schemas/schemas/objects -o interfaces --cwd=node_modules/wp-json-schemas",
+    "generate-types": "json2ts -i node_modules/wp-json-schemas/schemas/properties -o types --cwd=node_modules/wp-json-schemas --no-enableConstEnums --style.trailingComma=all"
   }
 }
