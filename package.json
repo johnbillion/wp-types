@@ -2,10 +2,10 @@
   "name": "wp-types",
   "version": "1.1.0",
   "description": "TypeScript definitions of WordPress core PHP objects",
-  "main": "",
-  "types": "index.d.ts",
+  "main": "index.ts",
+  "types": "index.ts",
   "files": [
-    "index.d.ts"
+    "index.ts"
   ],
   "homepage": "https://github.com/johnbillion/wp-types",
   "repository": {
@@ -26,6 +26,6 @@
     "json-schema-to-typescript": "^9.1.0"
   },
   "scripts": {
-    "generate": "json2ts -i node_modules/wp-json-schemas/schema.json -o index.d.ts --cwd=node_modules/wp-json-schemas  --no-enableConstEnums --style.trailingComma=all"
+    "generate": "json2ts -i node_modules/wp-json-schemas/schema.json -o index.ts --cwd=node_modules/wp-json-schemas  --no-enableConstEnums --style.trailingComma=all"
   }
 }
