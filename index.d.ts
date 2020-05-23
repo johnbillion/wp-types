@@ -9,11 +9,87 @@
  * WordPress is open source software you can use to create a beautiful website, blog, or app.
  */
 export interface WP {
+  Comment?: WP_Comment;
   Error?: WP_Error;
   Error_With_Error?: WP_Error_With_Error;
   Error_Without_Error?: WP_Error_Without_Error;
   Post?: WP_Post;
   User?: WP_User;
+}
+/**
+ * Core class used to organize comments as instantiated objects with defined members.
+ */
+export interface WP_Comment {
+  /**
+   * Comment ID.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  comment_ID: string;
+  /**
+   * ID of the post the comment is associated with.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  comment_post_ID: string;
+  /**
+   * Comment author name.
+   */
+  comment_author: string;
+  /**
+   * Comment author email address.
+   */
+  comment_author_email: string;
+  /**
+   * Comment author URL.
+   */
+  comment_author_url: string;
+  /**
+   * Comment author IP address (IPv4 format).
+   */
+  comment_author_IP: string;
+  /**
+   * Comment date in YYYY-MM-DD HH:MM:SS format.
+   */
+  comment_date: string;
+  /**
+   * Comment GMT date in YYYY-MM-DD HH::MM:SS format.
+   */
+  comment_date_gmt: string;
+  /**
+   * Comment content.
+   */
+  comment_content: string;
+  /**
+   * Comment karma count.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  comment_karma: string;
+  /**
+   * Comment approval status.
+   */
+  comment_approved: string;
+  /**
+   * Comment author HTTP user agent.
+   */
+  comment_agent: string;
+  /**
+   * Comment type.
+   */
+  comment_type: string;
+  /**
+   * Parent comment ID.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  comment_parent: string;
+  /**
+   * Comment author ID.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  user_id: string;
 }
 /**
  * WordPress Error class.
