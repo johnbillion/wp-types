@@ -1,6 +1,6 @@
 # WordPress Type Definitions
 
-This package provides well-documented TypeScript definitions that describe the shape of WordPress core PHP objects such as `WP_Error`, `WP_Post`, and `WP_User`.
+This package provides well-documented TypeScript definitions that describe the shape of WordPress core PHP objects such as `WP_Error`, `WP_Post`, and `WP_User`, and the allowed values for several of their properties.
 
 This means when you're working with JSON representations of PHP objects from WordPress you get definitions for their properties and nice documentation in your code editor.
 
@@ -65,11 +65,3 @@ No. WordPress core objects in REST API responses are of a different shape, but I
 ### Can I use the enums as values in my code?
 
 Not currently, but I think this is a transpilation configuration problem in my consuming app. I'm trying to figure it out. Let me know if you can help.
-
-### Why doesn't object X include property Y?
-
-If it's not a public property of the object's class then it won't be included when encoding the object as JSON. You'll need to output it separately.
-
-### Are these definitions automatically generated from WordPress core?
-
-No. I started down that path (using [wp-parser-lib](https://github.com/johnbillion/wp-parser-lib)) but realised it's quicker to copy and paste from core, especially as I'm adding extra typings to properties when I can.
