@@ -58,6 +58,12 @@ printf(
 
 The definitions also apply outside of the browser of course, for example if you're saving data as JSON and reading it in a Node application.
 
+### How do I know these definitions are valid?
+
+They're generated directly from [the `wp-json-schemas` package](https://www.npmjs.com/package/wp-json-schemas), which is itself tested using output from WordPress core.
+
+If you'd like to contribute to these definitions, please contribute upstream to the `wp-json-schemas` package. Thanks!
+
 ### Do these definitions apply to REST API responses?
 
 No. WordPress core objects in REST API responses are of a different shape, but I'm interested in creating definitions for these at some point in the future.
