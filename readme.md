@@ -8,6 +8,7 @@ This means when you're working with JSON representations of PHP objects from Wor
 
 ### Interfaces
 
+* `WP_Comment`
 * `WP_Error`
 * `WP_Post`
 * `WP_User`
@@ -16,9 +17,13 @@ This means when you're working with JSON representations of PHP objects from Wor
 
 String enums are included for known possible values of some properties:
 
+* `WP_Error_Data`
+* `WP_Error_Messages`
 * `WP_Post_Status_Name`
 * `WP_Post_Type_Name`
-* `WP_User_Role`
+* `WP_User_Caps`
+* `WP_User_Data`
+* `WP_User_Role_Name`
 
 ## Installation
 
