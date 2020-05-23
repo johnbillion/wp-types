@@ -1,4 +1,4 @@
-import { WP_User_Role } from '../types/wp-user-role';
+import { WP_User_Role } from '../types/user-role';
 
 /**
  * User data container.

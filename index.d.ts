@@ -1,9 +1,9 @@
 // Interfaces:
-export * from './interfaces/wp-error';
-export * from './interfaces/wp-post';
-export * from './interfaces/wp-user';
+export * from './interfaces/error';
+export * from './interfaces/post';
+export * from './interfaces/user';
 
 // Types:
-export * from './types/wp-post-status-name';
-export * from './types/wp-post-type-name';
-export * from './types/wp-user-role';
+export * from './types/post-status-name';
+export * from './types/post-type-name';
+export * from './types/user-role';

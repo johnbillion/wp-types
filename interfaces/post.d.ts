@@ -1,5 +1,5 @@
-import { WP_Post_Status_Name } from '../types/wp-post-status-name';
-import { WP_Post_Type_Name } from '../types/wp-post-type-name';
+import { WP_Post_Status_Name } from '../types/post-status-name';
+import { WP_Post_Type_Name } from '../types/post-type-name';
 
 /**
  * Core class used to implement the WP_Post object.
