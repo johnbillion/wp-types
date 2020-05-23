@@ -9,13 +9,15 @@ This means when you're working with JSON representations of PHP objects from Wor
 ### Interfaces
 
 * `WP_Comment`
-* `WP_Error`
+* `WP_Error`, plus:
+  - `WP_Error_With_Error`
+  - `WP_Error_Without_Error`
 * `WP_Post`
 * `WP_User`
 
 ### Types
 
-String enums are included for known possible values of some properties:
+String enums and typings are included for known possible values and structures of some properties:
 
 * `WP_Error_Data`
 * `WP_Error_Messages`
