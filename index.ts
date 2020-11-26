@@ -232,7 +232,7 @@ export interface WP_Post {
   /**
    * ID of a post's parent post.
    */
-  post_parent: 0 | number;
+  post_parent: number;
   /**
    * The unique identifier for a post, not necessarily a URL, used as the feed GUID.
    */
@@ -240,7 +240,7 @@ export interface WP_Post {
   /**
    * A field used for ordering posts.
    */
-  menu_order: 0 | number;
+  menu_order: number;
   /**
    * The post's type, like post or page.
    */
@@ -248,13 +248,13 @@ export interface WP_Post {
   /**
    * An attachment's mime type.
    */
-  post_mime_type: "" | string;
+  post_mime_type: string;
   /**
    * Cached comment count.
    *
    * A numeric string, for compatibility reasons.
    */
-  comment_count: "0" | string;
+  comment_count: string;
   /**
    * Stores the post object's sanitization level.
    *
