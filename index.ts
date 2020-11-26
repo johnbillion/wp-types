@@ -291,7 +291,7 @@ export interface WP_User {
   /**
    * The filter context applied to user data fields.
    */
-  filter: "attribute" | "db" | "display" | "edit" | "js" | "raw";
+  filter: WP_User_Filter_Context;
   /**
    * The roles the user is part of.
    */
@@ -383,6 +383,14 @@ export enum WP_Post_Type_Name {
   oembed_cache = "oembed_cache",
   user_request = "user_request",
   wp_block = "wp_block",
+}
+export enum WP_User_Filter_Context {
+  attribute = "attribute",
+  db = "db",
+  display = "display",
+  edit = "edit",
+  js = "js",
+  raw = "raw",
 }
 export enum WP_User_Role_Name {
   administrator = "administrator",
