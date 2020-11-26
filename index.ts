@@ -15,6 +15,10 @@ export interface WP {
   Error_Without_Error?: WP_Error_Without_Error;
   Post?: WP_Post;
   User?: WP_User;
+  REST_API: {
+    Post: WP_REST_API_Post;
+    User: WP_REST_API_User;
+  };
 }
 /**
  * Core class used to organize comments as instantiated objects with defined members.
@@ -361,6 +365,263 @@ export interface WP_User_Data {
   user_url?: string;
   [k: string]: unknown;
 }
+/**
+ * A post object in a REST API context.
+ */
+export interface WP_REST_API_Post {
+  /**
+   * The date the object was published, in the site's timezone.
+   */
+  date: string | null;
+  /**
+   * The date the object was published, as GMT.
+   */
+  date_gmt: string | null;
+  /**
+   * The globally unique identifier for the object.
+   */
+  guid: {
+    /**
+     * GUID for the object, as it exists in the database. Only present when using the 'edit' context.
+     */
+    raw?: string;
+    /**
+     * GUID for the object, transformed for display.
+     */
+    rendered: string;
+  };
+  /**
+   * Unique identifier for the object.
+   */
+  id: number;
+  /**
+   * URL to the object.
+   */
+  link: string;
+  /**
+   * The date the object was last modified, in the site's timezone.
+   */
+  modified: string;
+  /**
+   * The date the object was last modified, as GMT.
+   */
+  modified_gmt: string;
+  /**
+   * An alphanumeric identifier for the object unique to its type.
+   */
+  slug: string;
+  /**
+   * A named status for the object.
+   */
+  status: WP_Post_Status_Name | string;
+  /**
+   * Type of Post for the object.
+   */
+  type: WP_Post_Type_Name | string;
+  /**
+   * A password to protect access to the content and excerpt. Only present when using the 'edit' context.
+   */
+  password?: string;
+  /**
+   * Permalink template for the object. Only present when using the 'edit' context.
+   */
+  permalink_template?: string;
+  /**
+   * Slug automatically generated from the object title. Only present when using the 'edit' context.
+   */
+  generated_slug?: string;
+  /**
+   * The title for the object.
+   */
+  title: {
+    /**
+     * Title for the object, as it exists in the database. Only present when using the 'edit' context.
+     */
+    raw?: string;
+    /**
+     * HTML title for the object, transformed for display.
+     */
+    rendered: string;
+  };
+  /**
+   * The content for the object.
+   */
+  content: {
+    /**
+     * Content for the object, as it exists in the database. Only present when using the 'edit' context.
+     */
+    raw?: string;
+    /**
+     * HTML content for the object, transformed for display.
+     */
+    rendered: string;
+    /**
+     * Version of the content block format used by the object. Only present when using the 'edit' context.
+     */
+    block_version?: number;
+    /**
+     * Whether the content is protected with a password.
+     */
+    protected: boolean;
+  };
+  /**
+   * The ID for the author of the object.
+   */
+  author: number;
+  /**
+   * The excerpt for the object.
+   */
+  excerpt: {
+    /**
+     * Excerpt for the object, as it exists in the database. Only present when using the 'edit' context.
+     */
+    raw?: string;
+    /**
+     * HTML excerpt for the object, transformed for display.
+     */
+    rendered: string;
+    /**
+     * Whether the excerpt is protected with a password.
+     */
+    protected: boolean;
+  };
+  /**
+   * The ID of the featured media for the object.
+   */
+  featured_media?: number;
+  /**
+   * Whether or not comments are open on the object.
+   */
+  comment_status: WP_Post_Comment_Status_Name;
+  /**
+   * Whether or not the object can be pinged.
+   */
+  ping_status: WP_Post_Comment_Status_Name;
+  /**
+   * The format for the object.
+   */
+  format?: WP_Post_Format_Name;
+  /**
+   * Meta fields.
+   */
+  meta: {
+    [k: string]: unknown;
+  };
+  /**
+   * Whether or not the object should be treated as sticky.
+   */
+  sticky: boolean;
+  /**
+   * The theme file to use to display the object.
+   */
+  template: string;
+  /**
+   * The terms assigned to the object in the category taxonomy.
+   */
+  categories: number[];
+  /**
+   * The terms assigned to the object in the post_tag taxonomy.
+   */
+  tags: number[];
+  [k: string]: unknown;
+}
+/**
+ * A user object in a REST API context.
+ */
+export interface WP_REST_API_User {
+  /**
+   * Unique identifier for the user.
+   */
+  id: number;
+  /**
+   * Login name for the user. Only present when using the 'edit' context.
+   */
+  username?: string;
+  /**
+   * Display name for the user.
+   */
+  name: string;
+  /**
+   * First name for the user. Only present when using the 'edit' context.
+   */
+  first_name?: string;
+  /**
+   * Last name for the user. Only present when using the 'edit' context.
+   */
+  last_name?: string;
+  /**
+   * The email address for the user. Only present when using the 'edit' context.
+   */
+  email?: string;
+  /**
+   * URL of the user.
+   */
+  url: string;
+  /**
+   * Description of the user.
+   */
+  description: string;
+  /**
+   * Author URL of the user.
+   */
+  link: string;
+  /**
+   * Locale for the user. Only present when using the 'edit' context.
+   */
+  locale?: string;
+  /**
+   * The nickname for the user. Only present when using the 'edit' context.
+   */
+  nickname?: string;
+  /**
+   * An alphanumeric identifier for the user.
+   */
+  slug: string;
+  /**
+   * Registration date for the user. Only present when using the 'edit' context.
+   */
+  registered_date?: string;
+  /**
+   * Roles assigned to the user. Only present when using the 'edit' context.
+   */
+  roles?: (WP_User_Role_Name | string)[];
+  /**
+   * All capabilities assigned to the user. Only present when using the 'edit' context.
+   */
+  capabilities?: WP_User_Caps;
+  /**
+   * Any extra capabilities assigned to the user. Only present when using the 'edit' context.
+   */
+  extra_capabilities?: WP_User_Caps;
+  /**
+   * Avatar URLs for the user.
+   */
+  avatar_urls: {
+    /**
+     * Avatar URL with image size of 24 pixels.
+     */
+    "24": string;
+    /**
+     * Avatar URL with image size of 48 pixels.
+     */
+    "48": string;
+    /**
+     * Avatar URL with image size of 96 pixels.
+     */
+    "96": string;
+    /**
+     * Avatar URL with image of another size.
+     */
+    [k: string]: string;
+  };
+  /**
+   * Meta fields.
+   */
+  meta: {
+    [k: string]: unknown;
+  };
+  [k: string]: unknown;
+}
 
 export enum WP_Post_Status_Name {
   publish = "publish",
@@ -398,4 +659,20 @@ export enum WP_User_Role_Name {
   author = "author",
   contributor = "contributor",
   subscriber = "subscriber",
+}
+export enum WP_Post_Comment_Status_Name {
+  open = "open",
+  closed = "closed",
+}
+export enum WP_Post_Format_Name {
+  aside = "aside",
+  audio = "audio",
+  chat = "chat",
+  gallery = "gallery",
+  image = "image",
+  link = "link",
+  quote = "quote",
+  standard = "standard",
+  status = "status",
+  video = "video",
 }
