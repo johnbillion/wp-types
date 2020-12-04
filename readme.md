@@ -4,7 +4,7 @@ This package provides well-documented TypeScript definitions that describe the s
 
 * WordPress core PHP objects such as `WP_Error`, `WP_Post`, and `WP_User`
 * WordPress REST API responses such as those from `/wp/v2/posts` and `/wp/v2/users`
-* The allowed values for several of their properties for both
+* The allowed values for several of the properties of both
 
 This means when you're working with JSON representations of PHP objects from WordPress, or working with items from a REST API response, you can add types for your data and then get definitions for their properties and nice documentation in your code editor.
 
@@ -83,23 +83,16 @@ const userIDs = api.then( users => users.map( user => user.id ) );
 
 ### When do these definitions apply?
 
-The core object definitions apply whenever a supported PHP object is represented as JSON. How you do that depends on your application, but here are some examples:
+The core object definitions apply whenever a supported PHP object is represented as JSON. How you do that depends on your application, but here is an example:
 
 ```php
-// get_post() returns a WP_Post or null:
 printf(
 	'let wpPost = %s;',
 	wp_json_encode( get_post() )
 );
-
-// get_userdata() returns a WP_User or false:
-printf(
-	'let wpUser = %s;',
-	wp_json_encode( get_userdata( 123 ) )
-);
 ```
 
-The REST API object definitions apply to the object (or array of objects) you get in response to a REST API request.
+The REST API object definitions apply to the object (or array of objects) you get in response to a REST API request. They are especially useful when using `apiFetch()`.
 
 The definitions also apply outside of the browser of course, for example if you're saving data as JSON and reading it in a Node application.
 
