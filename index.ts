@@ -15,9 +15,9 @@ export interface WP {
   Error_Without_Error?: WP_Error_Without_Error;
   Post?: WP_Post;
   User?: WP_User;
-  REST_API: {
-    Post: WP_REST_API_Post;
-    User: WP_REST_API_User;
+  REST_API?: {
+    Post?: WP_REST_API_Post;
+    User?: WP_REST_API_User;
   };
 }
 /**
