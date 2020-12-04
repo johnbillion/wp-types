@@ -21,22 +21,31 @@ This means when you're working with JSON representations of PHP objects from Wor
 
 ### Interfaces for REST API response objects
 
+* `WP_REST_API_Comment`
 * `WP_REST_API_Post`
+* `WP_REST_API_Term`
 * `WP_REST_API_User`
+* `WP_REST_API_Error` (for any REST API error response)
 
-### Types
+### Properties
 
-String enums and typings are included for known possible values and structures of various properties:
+Interfaces are used for the structure of some object properties:
 
 * `WP_Error_Data`
 * `WP_Error_Messages`
+* `WP_User_Caps`
+* `WP_User_Data`
+
+### Enums
+
+String enums are used for values of some object properties:
+
+* `WP_Comment_Status_Name`
+* `WP_Comment_Type_Name`
 * `WP_Post_Comment_Status_Name`
 * `WP_Post_Format_Name`
 * `WP_Post_Status_Name`
 * `WP_Post_Type_Name`
-* `WP_User_Caps`
-* `WP_User_Data`
-* `WP_User_Filter_Context`
 * `WP_User_Role_Name`
 
 ## Installation

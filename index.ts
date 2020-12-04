@@ -16,8 +16,11 @@ export interface WP {
   Post?: WP_Post;
   User?: WP_User;
   REST_API?: {
+    Comment?: WP_REST_API_Comment;
     Post?: WP_REST_API_Post;
+    Term?: WP_REST_API_Term;
     User?: WP_REST_API_User;
+    Error?: WP_REST_API_Error;
   };
 }
 /**
@@ -366,6 +369,108 @@ export interface WP_User_Data {
   [k: string]: unknown;
 }
 /**
+ * A comment object in a REST API context.
+ */
+export interface WP_REST_API_Comment {
+  /**
+   * Unique identifier for the object.
+   */
+  id: number;
+  /**
+   * The ID of the user object, if author was a user.
+   */
+  author: number;
+  /**
+   * Email address for the object author. Only present when using the 'edit' context.
+   */
+  author_email?: string;
+  /**
+   * IP address for the object author. Only present when using the 'edit' context.
+   */
+  author_ip?: string;
+  /**
+   * Display name for the object author.
+   */
+  author_name: string;
+  /**
+   * URL for the object author.
+   */
+  author_url: string;
+  /**
+   * User agent for the object author. Only present when using the 'edit' context.
+   */
+  author_user_agent?: string;
+  /**
+   * The content for the object.
+   */
+  content: {
+    /**
+     * Content for the object, as it exists in the database. Only present when using the 'edit' context.
+     */
+    raw?: string;
+    /**
+     * HTML content for the object, transformed for display.
+     */
+    rendered?: string;
+  };
+  /**
+   * The date the object was published, in the site's timezone.
+   */
+  date: string;
+  /**
+   * The date the object was published, as GMT.
+   */
+  date_gmt: string;
+  /**
+   * URL to the object.
+   */
+  link: string;
+  /**
+   * The ID for the parent of the object.
+   */
+  parent: number;
+  /**
+   * The ID of the associated post object.
+   */
+  post: number;
+  /**
+   * State of the object.
+   */
+  status: WP_Comment_Status_Name | string;
+  /**
+   * Type of Comment for the object.
+   */
+  type: WP_Comment_Type_Name | string;
+  /**
+   * Avatar URLs for the object author.
+   */
+  author_avatar_urls?: {
+    /**
+     * Avatar URL with image size of 24 pixels.
+     */
+    "24"?: string;
+    /**
+     * Avatar URL with image size of 48 pixels.
+     */
+    "48"?: string;
+    /**
+     * Avatar URL with image size of 96 pixels.
+     */
+    "96"?: string;
+    /**
+     * Avatar URL with image of another size.
+     */
+    [k: string]: string;
+  };
+  /**
+   * Meta fields.
+   */
+  meta: {
+    [k: string]: unknown;
+  };
+  [k: string]: unknown;
+}
+/**
  * A post object in a REST API context.
  */
 export interface WP_REST_API_Post {
@@ -423,13 +528,17 @@ export interface WP_REST_API_Post {
    */
   password?: string;
   /**
-   * Permalink template for the object. Only present when using the 'edit' context.
+   * Permalink template for the object. Only present when using the 'edit' context and the post type is public.
    */
   permalink_template?: string;
   /**
-   * Slug automatically generated from the object title. Only present when using the 'edit' context.
+   * Slug automatically generated from the object title. Only present when using the 'edit' context and the post type is public.
    */
   generated_slug?: string;
+  /**
+   * The ID for the parent of the object. Only present for hierarchical post types.
+   */
+  parent?: number;
   /**
    * The title for the object.
    */
@@ -508,21 +617,65 @@ export interface WP_REST_API_Post {
     [k: string]: unknown;
   };
   /**
-   * Whether or not the object should be treated as sticky.
+   * Whether or not the object should be treated as sticky. Only present for the 'post' post type.
    */
-  sticky: boolean;
+  sticky?: boolean;
   /**
    * The theme file to use to display the object.
    */
-  template: string;
+  template?: string;
   /**
-   * The terms assigned to the object in the category taxonomy.
+   * The terms assigned to the object in the category taxonomy. Only present for post types that support categories.
    */
-  categories: number[];
+  categories?: number[];
   /**
-   * The terms assigned to the object in the post_tag taxonomy.
+   * The terms assigned to the object in the post_tag taxonomy. Only present for post types that support tags.
    */
-  tags: number[];
+  tags?: number[];
+  [k: string]: unknown;
+}
+/**
+ * A taxonomy term object in a REST API context.
+ */
+export interface WP_REST_API_Term {
+  /**
+   * Unique identifier for the term.
+   */
+  id: number;
+  /**
+   * Number of published posts for the term.
+   */
+  count: number;
+  /**
+   * HTML description of the term.
+   */
+  description: string;
+  /**
+   * URL of the term.
+   */
+  link: string;
+  /**
+   * HTML title for the term.
+   */
+  name: string;
+  /**
+   * An alphanumeric identifier for the term unique to its type.
+   */
+  slug: string;
+  /**
+   * Type attribution for the term.
+   */
+  taxonomy: string;
+  /**
+   * The parent term ID. Only present for hierarchical taxonomies.
+   */
+  parent?: number;
+  /**
+   * Meta fields.
+   */
+  meta: {
+    [k: string]: unknown;
+  };
   [k: string]: unknown;
 }
 /**
@@ -596,7 +749,7 @@ export interface WP_REST_API_User {
   /**
    * Avatar URLs for the user.
    */
-  avatar_urls: {
+  avatar_urls?: {
     /**
      * Avatar URL with image size of 24 pixels.
      */
@@ -621,6 +774,33 @@ export interface WP_REST_API_User {
     [k: string]: unknown;
   };
   [k: string]: unknown;
+}
+/**
+ * A REST API error response.
+ */
+export interface WP_REST_API_Error {
+  /**
+   * The error message code.
+   */
+  code: string;
+  /**
+   * The error message text.
+   */
+  message: string;
+  /**
+   * Extra data about the error
+   */
+  data: {
+    /**
+     * The HTTP status code
+     */
+    status?: number;
+    [k: string]: unknown;
+  };
+  /**
+   * Additional error objects, if there are any.
+   */
+  additional_errors?: WP_REST_API_Error[];
 }
 
 export enum WP_Post_Status_Name {
@@ -659,6 +839,17 @@ export enum WP_User_Role_Name {
   author = "author",
   contributor = "contributor",
   subscriber = "subscriber",
+}
+export enum WP_Comment_Status_Name {
+  approved = "approved",
+  unapproved = "unapproved",
+  spam = "spam",
+  trash = "trash",
+}
+export enum WP_Comment_Type_Name {
+  comment = "comment",
+  pingback = "pingback",
+  trackback = "trackback",
 }
 export enum WP_Post_Comment_Status_Name {
   open = "open",
