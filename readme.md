@@ -16,7 +16,9 @@ This means when you're working with JSON representations of PHP objects from Wor
 * `WP_Error`, plus:
   - `WP_Error_With_Error`
   - `WP_Error_Without_Error`
+* `WP_Post_Type`
 * `WP_Post`
+* `WP_Term`
 * `WP_User`
 
 ### Interfaces for REST API response objects
@@ -33,6 +35,10 @@ Interfaces are used for the structure of some object properties:
 
 * `WP_Error_Data`
 * `WP_Error_Messages`
+* `WP_Post_Type_Caps`
+* `WP_Post_Type_Labels`
+* `WP_Post_Type_Rewrite`
+* `WP_User_Cap_Name`
 * `WP_User_Caps`
 * `WP_User_Data`
 
@@ -46,6 +52,7 @@ String enums are used for values of some object properties:
 * `WP_Post_Format_Name`
 * `WP_Post_Status_Name`
 * `WP_Post_Type_Name`
+* `WP_Taxonomy_Name`
 * `WP_User_Role_Name`
 
 ## Installation

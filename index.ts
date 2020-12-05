@@ -6,6 +6,11 @@
  */
 
 /**
+ * The name of an individual primitive capability or meta capability.
+ */
+export type WP_User_Cap_Name = string;
+
+/**
  * WordPress is open source software you can use to create a beautiful website, blog, or app.
  */
 export interface WP {
@@ -14,6 +19,8 @@ export interface WP {
   Error_With_Error?: WP_Error_With_Error;
   Error_Without_Error?: WP_Error_Without_Error;
   Post?: WP_Post;
+  Post_Type?: WP_Post_Type;
+  Term?: WP_Term;
   User?: WP_User;
   REST_API?: {
     Comment?: WP_REST_API_Comment;
@@ -264,10 +271,276 @@ export interface WP_Post {
   comment_count: string;
   /**
    * Stores the post object's sanitization level.
-   *
-   * Does not correspond to a DB field.
    */
-  filter: "raw" | "edit" | "db" | "display";
+  filter: WP_Object_Filter_Context;
+}
+/**
+ * Core class used for interacting with post types.
+ */
+export interface WP_Post_Type {
+  /**
+   * Post type key.
+   */
+  name: WP_Post_Type_Name | string;
+  /**
+   * Name of the post type shown in the menu. Usually plural.
+   */
+  label: string;
+  labels: WP_Post_Type_Labels;
+  /**
+   * A short descriptive summary of what the post type is.
+   */
+  description: string;
+  /**
+   * Whether a post type is intended for use publicly either via the admin interface or by front-end users.
+   */
+  public: boolean;
+  /**
+   * Whether the post type is hierarchical.
+   */
+  hierarchical: boolean;
+  /**
+   * Whether to exclude posts with this post type from front end search results.
+   */
+  exclude_from_search: boolean;
+  /**
+   * Whether queries can be performed on the front end for the post type as part of `parse_request()`.
+   */
+  publicly_queryable: boolean;
+  /**
+   * Whether to generate and allow a UI for managing this post type in the admin.
+   */
+  show_ui: boolean;
+  /**
+   * Where to show the post type in the admin menu.
+   */
+  show_in_menu: boolean | string;
+  /**
+   * Makes this post type available for selection in navigation menus.
+   */
+  show_in_nav_menus: boolean;
+  /**
+   * Makes this post type available via the admin bar.
+   */
+  show_in_admin_bar: boolean;
+  /**
+   * The position in the menu order the post type should appear.
+   */
+  menu_position: number;
+  /**
+   * The URL or reference to the icon to be used for this menu. Can include a URL, a base64-encoded SVG using a data URI, the name of a Dashicons helper class, or 'none'.
+   */
+  menu_icon: string;
+  /**
+   * The string to use to build the read, edit, and delete capabilities.
+   */
+  capability_type: string;
+  /**
+   * Whether to use the internal default meta capability handling.
+   */
+  map_meta_cap: boolean;
+  /**
+   * Provide a callback function that sets up the meta boxes for the edit form.
+   */
+  register_meta_box_cb: {
+    [k: string]: unknown;
+  };
+  /**
+   * An array of taxonomy identifiers that will be registered for the post type.
+   */
+  taxonomies: (WP_Taxonomy_Name | string)[];
+  /**
+   * Whether there should be post type archives, or if a string, the archive slug to use.
+   */
+  has_archive: boolean | string;
+  /**
+   * Sets the query_var key for this post type.
+   */
+  query_var: string | boolean;
+  /**
+   * Whether to allow this post type to be exported.
+   */
+  can_export: boolean;
+  /**
+   * Whether to delete posts of this type when deleting a user.
+   */
+  delete_with_user: boolean;
+  /**
+   * Array of blocks to use as the default initial state for an editor session.
+   */
+  template: unknown[];
+  /**
+   * Whether the block template should be locked if $template is set.
+   */
+  template_lock: false | "all" | "insert";
+  /**
+   * Whether this post type is a native or 'built-in' post_type.
+   */
+  _builtin: boolean;
+  /**
+   * URL segment to use for edit link of this post type.
+   */
+  _edit_link: string;
+  /**
+   * Post type capabilities.
+   */
+  cap: WP_Post_Type_Caps;
+  /**
+   * Triggers the handling of rewrites for this post type.
+   */
+  rewrite: boolean | WP_Post_Type_Rewrite;
+  /**
+   * The features supported by the post type.
+   */
+  supports?: {
+    [k: string]: unknown;
+  };
+  /**
+   * Whether this post type should appear in the REST API.
+   */
+  show_in_rest: boolean;
+  /**
+   * The base path for this post type's REST API endpoints.
+   */
+  rest_base: string | boolean;
+  /**
+   * The controller for this post type's REST API endpoints.
+   */
+  rest_controller_class: string;
+  /**
+   * The controller instance for this post type's REST API endpoints.
+   */
+  rest_controller: {
+    [k: string]: unknown;
+  };
+}
+/**
+ * Labels object for this post type.
+ */
+export interface WP_Post_Type_Labels {
+  name: string;
+  singular_name: string;
+  add_new: string;
+  add_new_item: string;
+  edit_item: string;
+  new_item: string;
+  view_item: string;
+  view_items: string;
+  search_items: string;
+  not_found: string;
+  not_found_in_trash: string;
+  parent_item_colon: string;
+  all_items: string;
+  archives: string;
+  attributes: string;
+  insert_into_item: string;
+  uploaded_to_this_item: string;
+  featured_image: string;
+  set_featured_image: string;
+  remove_featured_image: string;
+  use_featured_image: string;
+  filter_items_list: string;
+  items_list_navigation: string;
+  items_list: string;
+  item_published: string;
+  item_published_privately: string;
+  item_reverted_to_draft: string;
+  item_scheduled: string;
+  item_updated: string;
+  menu_name: string;
+  name_admin_bar: string;
+  [k: string]: string;
+}
+/**
+ * Post type capabilities.
+ */
+export interface WP_Post_Type_Caps {
+  edit_post: WP_User_Cap_Name;
+  read_post: WP_User_Cap_Name;
+  delete_post: WP_User_Cap_Name;
+  edit_posts: WP_User_Cap_Name;
+  edit_others_posts: WP_User_Cap_Name;
+  delete_posts: WP_User_Cap_Name;
+  publish_posts: WP_User_Cap_Name;
+  read_private_posts: WP_User_Cap_Name;
+  read: WP_User_Cap_Name;
+  delete_private_posts: WP_User_Cap_Name;
+  delete_published_posts: WP_User_Cap_Name;
+  delete_others_posts: WP_User_Cap_Name;
+  edit_private_posts: WP_User_Cap_Name;
+  edit_published_posts: WP_User_Cap_Name;
+  create_posts: WP_User_Cap_Name;
+}
+/**
+ * Post type rewrite rule definition.
+ */
+export interface WP_Post_Type_Rewrite {
+  /**
+   * Customize the permastruct slug.
+   */
+  slug?: string;
+  /**
+   * Whether the permastruct should be prepended with WP_Rewrite::$front.
+   */
+  with_front?: boolean;
+  /**
+   * Whether the feed permastruct should be built for this post type.
+   */
+  feeds?: boolean;
+  /**
+   * Whether the permastruct should provide for pagination.
+   */
+  pages?: boolean;
+  /**
+   * Endpoint mask to assign.
+   */
+  ep_mask?: number;
+  [k: string]: unknown;
+}
+/**
+ * Core class used to implement the WP_Term object.
+ */
+export interface WP_Term {
+  /**
+   * Term ID.
+   */
+  term_id: number;
+  /**
+   * The term's name.
+   */
+  name: string;
+  /**
+   * The term's slug.
+   */
+  slug: string;
+  /**
+   * The term's term_group.
+   */
+  term_group: number;
+  /**
+   * Term Taxonomy ID.
+   */
+  term_taxonomy_id: number;
+  /**
+   * The term's taxonomy name.
+   */
+  taxonomy: WP_Taxonomy_Name | string;
+  /**
+   * The term's description.
+   */
+  description: string;
+  /**
+   * ID of a term's parent term.
+   */
+  parent: number;
+  /**
+   * Cached object count for this term.
+   */
+  count: number;
+  /**
+   * Stores the term object's sanitization level.
+   */
+  filter: WP_Object_Filter_Context;
 }
 /**
  * Core class used to implement the WP_User object.
@@ -298,7 +571,7 @@ export interface WP_User {
   /**
    * The filter context applied to user data fields.
    */
-  filter: WP_User_Filter_Context;
+  filter: WP_Object_Filter_Context;
   /**
    * The roles the user is part of.
    */
@@ -465,10 +738,37 @@ export interface WP_REST_API_Comment {
   /**
    * Meta fields.
    */
-  meta: {
-    [k: string]: unknown;
+  meta:
+    | []
+    | {
+        [k: string]: unknown;
+      };
+  _links: WP_REST_API_Object_Links;
+  /**
+   * The embedded representation of relations. Only present when the '_embed' query parameter is set.
+   */
+  _embedded?: {
+    /**
+     * The author of the comment.
+     */
+    author: unknown[];
+    /**
+     * The associated post.
+     */
+    up?: unknown[];
+    [k: string]: unknown[];
   };
   [k: string]: unknown;
+}
+/**
+ * The relations for the object and its properties.
+ */
+export interface WP_REST_API_Object_Links {
+  [k: string]: {
+    href: string;
+    embeddable?: boolean;
+    [k: string]: unknown;
+  }[];
 }
 /**
  * A post object in a REST API context.
@@ -613,9 +913,11 @@ export interface WP_REST_API_Post {
   /**
    * Meta fields.
    */
-  meta: {
-    [k: string]: unknown;
-  };
+  meta:
+    | []
+    | {
+        [k: string]: unknown;
+      };
   /**
    * Whether or not the object should be treated as sticky. Only present for the 'post' post type.
    */
@@ -632,6 +934,29 @@ export interface WP_REST_API_Post {
    * The terms assigned to the object in the post_tag taxonomy. Only present for post types that support tags.
    */
   tags?: number[];
+  _links: WP_REST_API_Object_Links;
+  /**
+   * The embedded representation of relations. Only present when the '_embed' query parameter is set.
+   */
+  _embedded?: {
+    /**
+     * The author of the post.
+     */
+    author: unknown[];
+    /**
+     * The replies to the post (comments, pingbacks, trackbacks).
+     */
+    replies?: unknown[][];
+    /**
+     * The taxonomy terms for the post.
+     */
+    "wp:term"?: unknown[];
+    /**
+     * The parent post.
+     */
+    up?: unknown[];
+    [k: string]: unknown[];
+  };
   [k: string]: unknown;
 }
 /**
@@ -665,7 +990,7 @@ export interface WP_REST_API_Term {
   /**
    * Type attribution for the term.
    */
-  taxonomy: string;
+  taxonomy: WP_Taxonomy_Name | string;
   /**
    * The parent term ID. Only present for hierarchical taxonomies.
    */
@@ -673,9 +998,12 @@ export interface WP_REST_API_Term {
   /**
    * Meta fields.
    */
-  meta: {
-    [k: string]: unknown;
-  };
+  meta:
+    | []
+    | {
+        [k: string]: unknown;
+      };
+  _links: WP_REST_API_Object_Links;
   [k: string]: unknown;
 }
 /**
@@ -770,9 +1098,12 @@ export interface WP_REST_API_User {
   /**
    * Meta fields.
    */
-  meta: {
-    [k: string]: unknown;
-  };
+  meta:
+    | []
+    | {
+        [k: string]: unknown;
+      };
+  _links: WP_REST_API_Object_Links;
   [k: string]: unknown;
 }
 /**
@@ -825,13 +1156,20 @@ export enum WP_Post_Type_Name {
   user_request = "user_request",
   wp_block = "wp_block",
 }
-export enum WP_User_Filter_Context {
+export enum WP_Object_Filter_Context {
   attribute = "attribute",
   db = "db",
   display = "display",
   edit = "edit",
   js = "js",
   raw = "raw",
+  rss = "rss",
+}
+export enum WP_Taxonomy_Name {
+  category = "category",
+  post_tag = "post_tag",
+  nav_menu = "nav_menu",
+  post_format = "post_format",
 }
 export enum WP_User_Role_Name {
   administrator = "administrator",
