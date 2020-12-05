@@ -12,21 +12,21 @@ This means when you're working with JSON representations of PHP objects from Wor
 
 ### Interfaces for PHP objects
 
-* `WP_Comment`
-* `WP_Error`, plus:
-  - `WP_Error_With_Error`
-  - `WP_Error_Without_Error`
-* `WP_Post_Type`
 * `WP_Post`
 * `WP_Term`
 * `WP_User`
+* `WP_Comment`
+* `WP_Post_Type`
+* `WP_Error`, plus:
+  - `WP_Error_With_Error`
+  - `WP_Error_Without_Error`
 
 ### Interfaces for REST API response objects
 
-* `WP_REST_API_Comment`
 * `WP_REST_API_Post`
 * `WP_REST_API_Term`
 * `WP_REST_API_User`
+* `WP_REST_API_Comment`
 * `WP_REST_API_Error` (for any REST API error response)
 
 ### Properties
