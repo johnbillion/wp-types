@@ -1134,7 +1134,7 @@ export interface WP_REST_API_Error {
   additional_errors?: WP_REST_API_Error[];
 }
 
-export enum WP_Post_Status_Name {
+export const enum WP_Post_Status_Name {
   publish = "publish",
   draft = "draft",
   auto_draft = "auto-draft",
@@ -1144,7 +1144,7 @@ export enum WP_Post_Status_Name {
   trash = "trash",
   private = "private",
 }
-export enum WP_Post_Type_Name {
+export const enum WP_Post_Type_Name {
   post = "post",
   page = "page",
   attachment = "attachment",
@@ -1156,7 +1156,7 @@ export enum WP_Post_Type_Name {
   user_request = "user_request",
   wp_block = "wp_block",
 }
-export enum WP_Object_Filter_Context {
+export const enum WP_Object_Filter_Context {
   attribute = "attribute",
   db = "db",
   display = "display",
@@ -1165,35 +1165,35 @@ export enum WP_Object_Filter_Context {
   raw = "raw",
   rss = "rss",
 }
-export enum WP_Taxonomy_Name {
+export const enum WP_Taxonomy_Name {
   category = "category",
   post_tag = "post_tag",
   nav_menu = "nav_menu",
   post_format = "post_format",
 }
-export enum WP_User_Role_Name {
+export const enum WP_User_Role_Name {
   administrator = "administrator",
   editor = "editor",
   author = "author",
   contributor = "contributor",
   subscriber = "subscriber",
 }
-export enum WP_Comment_Status_Name {
+export const enum WP_Comment_Status_Name {
   approved = "approved",
   unapproved = "unapproved",
   spam = "spam",
   trash = "trash",
 }
-export enum WP_Comment_Type_Name {
+export const enum WP_Comment_Type_Name {
   comment = "comment",
   pingback = "pingback",
   trackback = "trackback",
 }
-export enum WP_Post_Comment_Status_Name {
+export const enum WP_Post_Comment_Status_Name {
   open = "open",
   closed = "closed",
 }
-export enum WP_Post_Format_Name {
+export const enum WP_Post_Format_Name {
   aside = "aside",
   audio = "audio",
   chat = "chat",

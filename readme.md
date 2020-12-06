@@ -111,4 +111,15 @@ If you'd like to contribute to these definitions, please contribute upstream to 
 
 ### Can I use the enums as values in my code?
 
-Not currently, but I think this is a transpilation configuration problem in my consuming app. I'm trying to figure it out. Let me know if you can help.
+Yes, but:
+
+* You might need `preserveConstEnums` enabled in your TypeScript config
+* You should import enums as you would a regular module, not as a `type`
+
+Example:
+
+```ts
+import { WP_Post_Type_Name } from 'wp-types';
+
+console.log( WP_Post_Type_Name.auto_draft );
+```
