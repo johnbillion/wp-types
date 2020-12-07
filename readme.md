@@ -1,4 +1,4 @@
-# WordPress Type Definitions
+# WordPress TypeScript Definitions
 
 This package provides well-documented TypeScript definitions that describe the shape of:
 
