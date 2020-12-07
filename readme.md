@@ -123,3 +123,7 @@ import { WP_Post_Type_Name } from 'wp-types';
 
 console.log( WP_Post_Type_Name.auto_draft );
 ```
+
+## License
+
+MIT
