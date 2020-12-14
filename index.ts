@@ -6,9 +6,17 @@
  */
 
 /**
+ * Timestamp in MySQL DATETIME format (`YYYY-MM-DD hh:mm:ss`).
+ */
+export type WP_Date_Time = string;
+/**
  * The name of an individual primitive capability or meta capability.
  */
 export type WP_User_Cap_Name = string;
+/**
+ * Timestamp in IETF RFC 3339 date-time format minus the timezone identifier (`YYYY-MM-DDThh:mm:ss`).
+ */
+export type WP_REST_API_Date_Time = string;
 
 /**
  * WordPress is open source software you can use to create a beautiful website, blog, or app.
@@ -65,11 +73,11 @@ export interface WP_Comment {
   /**
    * Comment date in YYYY-MM-DD HH:MM:SS format.
    */
-  comment_date: string;
+  comment_date: WP_Date_Time;
   /**
    * Comment GMT date in YYYY-MM-DD HH::MM:SS format.
    */
-  comment_date_gmt: string;
+  comment_date_gmt: WP_Date_Time;
   /**
    * Comment content.
    */
@@ -186,11 +194,11 @@ export interface WP_Post {
   /**
    * The post's local publication time.
    */
-  post_date: string;
+  post_date: WP_Date_Time;
   /**
    * The post's GMT publication time.
    */
-  post_date_gmt: string;
+  post_date_gmt: WP_Date_Time;
   /**
    * The post's content.
    */
@@ -234,11 +242,11 @@ export interface WP_Post {
   /**
    * The post's local modified time.
    */
-  post_modified: string;
+  post_modified: WP_Date_Time;
   /**
    * The post's GMT modified time.
    */
-  post_modified_gmt: string;
+  post_modified_gmt: WP_Date_Time;
   /**
    * A utility DB field for post content.
    */
@@ -630,7 +638,7 @@ export interface WP_User_Data {
   /**
    * The user's registration date.
    */
-  user_registered?: string;
+  user_registered?: WP_Date_Time;
   /**
    * The user's status. This field does not appear to be used by WordPress core.
    */
@@ -689,11 +697,11 @@ export interface WP_REST_API_Comment {
   /**
    * The date the object was published, in the site's timezone.
    */
-  date: string;
+  date: WP_REST_API_Date_Time;
   /**
    * The date the object was published, as GMT.
    */
-  date_gmt: string;
+  date_gmt: WP_REST_API_Date_Time;
   /**
    * URL to the object.
    */
@@ -777,11 +785,11 @@ export interface WP_REST_API_Post {
   /**
    * The date the object was published, in the site's timezone.
    */
-  date: string | null;
+  date: WP_REST_API_Date_Time;
   /**
    * The date the object was published, as GMT.
    */
-  date_gmt: string | null;
+  date_gmt: WP_REST_API_Date_Time;
   /**
    * The globally unique identifier for the object.
    */
@@ -806,11 +814,11 @@ export interface WP_REST_API_Post {
   /**
    * The date the object was last modified, in the site's timezone.
    */
-  modified: string;
+  modified: WP_REST_API_Date_Time;
   /**
    * The date the object was last modified, as GMT.
    */
-  modified_gmt: string;
+  modified_gmt: WP_REST_API_Date_Time;
   /**
    * An alphanumeric identifier for the object unique to its type.
    */
@@ -1061,7 +1069,7 @@ export interface WP_REST_API_User {
   /**
    * Registration date for the user. Only present when using the 'edit' context.
    */
-  registered_date?: string;
+  registered_date?: WP_REST_API_Date_Time;
   /**
    * Roles assigned to the user. Only present when using the 'edit' context.
    */

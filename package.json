@@ -1,7 +1,7 @@
 {
   "name": "wp-types",
   "version": "1.4.0",
-  "description": "TypeScript definitions of WordPress core PHP objects",
+  "description": "TypeScript definitions of WordPress core PHP objects and REST API responses.",
   "main": "",
   "types": "index.ts",
   "files": [
@@ -22,7 +22,7 @@
     "typescript": ">=3"
   },
   "devDependencies": {
-    "wp-json-schemas": "^1.4.0",
+    "wp-json-schemas": "^1.5.0",
     "json-schema-to-typescript": "^9.1.0"
   },
   "scripts": {
