@@ -33,6 +33,7 @@ export interface WP {
   REST_API?: {
     Comment?: WP_REST_API_Comment;
     Post?: WP_REST_API_Post;
+    Media?: WP_REST_API_Media;
     Term?: WP_REST_API_Term;
     User?: WP_REST_API_User;
     Error?: WP_REST_API_Error;
@@ -954,15 +955,186 @@ export interface WP_REST_API_Post {
     /**
      * The replies to the post (comments, pingbacks, trackbacks).
      */
-    replies?: unknown[][];
+    replies?: unknown[];
     /**
      * The taxonomy terms for the post.
      */
     "wp:term"?: unknown[];
     /**
+     * The featured image post.
+     */
+    "wp:featuredmedia"?: unknown[];
+    /**
      * The parent post.
      */
     up?: unknown[];
+    [k: string]: unknown[];
+  };
+  [k: string]: unknown;
+}
+/**
+ * A media object in a REST API context.
+ */
+export interface WP_REST_API_Media {
+  /**
+   * The date the object was published, in the site's timezone.
+   */
+  date: WP_REST_API_Date_Time;
+  /**
+   * The date the object was published, as GMT.
+   */
+  date_gmt: WP_REST_API_Date_Time;
+  /**
+   * The globally unique identifier for the object.
+   */
+  guid: {
+    /**
+     * GUID for the object, as it exists in the database. Only present when using the 'edit' context.
+     */
+    raw?: string;
+    /**
+     * GUID for the object, transformed for display.
+     */
+    rendered: string;
+  };
+  /**
+   * Unique identifier for the object.
+   */
+  id: number;
+  /**
+   * URL to the object.
+   */
+  link: string;
+  /**
+   * The date the object was last modified, in the site's timezone.
+   */
+  modified: WP_REST_API_Date_Time;
+  /**
+   * The date the object was last modified, as GMT.
+   */
+  modified_gmt: WP_REST_API_Date_Time;
+  /**
+   * An alphanumeric identifier for the object unique to its type.
+   */
+  slug: string;
+  /**
+   * A named status for the object.
+   */
+  status: WP_Post_Status_Name | string;
+  /**
+   * Type of Post for the object.
+   */
+  type: WP_Post_Type_Name.attachment;
+  /**
+   * Alternative text to display when attachment is not displayed.
+   */
+  alt_text: string;
+  /**
+   * The attachment caption.
+   */
+  caption: {
+    /**
+     * Caption for the attachment, as it exists in the database. Only present when using the 'edit' context.
+     */
+    raw?: string;
+    /**
+     * HTML caption for the attachment, transformed for display.
+     */
+    rendered: string;
+  };
+  /**
+   * The attachment description.
+   */
+  description: {
+    /**
+     * Description for the object, as it exists in the database. Only present when using the 'edit' context.
+     */
+    raw?: string;
+    /**
+     * HTML description for the object, transformed for display.
+     */
+    rendered: string;
+  };
+  /**
+   * The attachment MIME type.
+   */
+  media_type: string;
+  /**
+   * Details about the media file, specific to its type.
+   */
+  media_details: {
+    [k: string]: unknown;
+  };
+  /**
+   * The ID for the associated post of the attachment.
+   */
+  post: number;
+  /**
+   * URL to the original attachment file.
+   */
+  source_url: string;
+  /**
+   * List of the missing image sizes of the attachment.  Only present when using the 'edit' context.
+   */
+  missing_image_sizes: string[];
+  /**
+   * Permalink template for the object. Only present when using the 'edit' context and the post type is public.
+   */
+  permalink_template?: string;
+  /**
+   * Slug automatically generated from the object title. Only present when using the 'edit' context and the post type is public.
+   */
+  generated_slug?: string;
+  /**
+   * The title for the object.
+   */
+  title: {
+    /**
+     * Title for the object, as it exists in the database. Only present when using the 'edit' context.
+     */
+    raw?: string;
+    /**
+     * HTML title for the object, transformed for display.
+     */
+    rendered: string;
+  };
+  /**
+   * The ID for the author of the object.
+   */
+  author: number;
+  /**
+   * Whether or not comments are open on the object.
+   */
+  comment_status: WP_Post_Comment_Status_Name;
+  /**
+   * Whether or not the object can be pinged.
+   */
+  ping_status: WP_Post_Comment_Status_Name;
+  /**
+   * Meta fields.
+   */
+  meta:
+    | []
+    | {
+        [k: string]: unknown;
+      };
+  /**
+   * The theme file to use to display the object.
+   */
+  template: string;
+  _links: WP_REST_API_Object_Links;
+  /**
+   * The embedded representation of relations. Only present when the '_embed' query parameter is set.
+   */
+  _embedded?: {
+    /**
+     * The author of the post.
+     */
+    author: unknown[];
+    /**
+     * The featured image post.
+     */
+    "wp:featuredmedia"?: unknown[];
     [k: string]: unknown[];
   };
   [k: string]: unknown;

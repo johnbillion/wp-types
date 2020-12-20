@@ -27,6 +27,7 @@ This means when you're working with JSON representations of PHP objects from Wor
 * `WP_REST_API_Term`
 * `WP_REST_API_User`
 * `WP_REST_API_Comment`
+* `WP_REST_API_Media`
 * `WP_REST_API_Error` (for any REST API error response)
 
 ### Properties
@@ -82,6 +83,7 @@ import type {
 	WP_REST_API_Term,
 	WP_REST_API_User,
 	WP_REST_API_Comment,
+	WP_REST_API_Media,
 } from 'wp-types';
 
 // Posts, Pages, and custom post types:
@@ -102,6 +104,11 @@ const api: Promise<WP_REST_API_User[]> = wp.apiFetch( {
 // Comments:
 const api: Promise<WP_REST_API_Comment[]> = wp.apiFetch( {
 	path: '/wp/v2/comments/',
+} );
+
+// Media attachments:
+const api: Promise<WP_REST_API_Media[]> = wp.apiFetch( {
+	path: '/wp/v2/media/',
 } );
 ```
 
