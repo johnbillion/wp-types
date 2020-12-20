@@ -77,14 +77,32 @@ function get_title( post: WP_Post ): string {
 Usage with the REST API, for example when using `apiFetch()`:
 
 ```ts
-import type { WP_REST_API_User } from 'wp-types';
+import type {
+	WP_REST_API_Post,
+	WP_REST_API_Term,
+	WP_REST_API_User,
+	WP_REST_API_Comment,
+} from 'wp-types';
 
+// Posts, Pages, and custom post types:
+const api: Promise<WP_REST_API_Post[]> = wp.apiFetch( {
+	path: '/wp/v2/posts/',
+} );
+
+// Categories, Tags, and custom taxonomies:
+const api: Promise<WP_REST_API_Term[]> = wp.apiFetch( {
+	path: '/wp/v2/categories/',
+} );
+
+// Users:
 const api: Promise<WP_REST_API_User[]> = wp.apiFetch( {
 	path: '/wp/v2/users/',
 } );
 
-// userIDs now has a known type of `number[]`
-const userIDs = api.then( users => users.map( user => user.id ) );
+// Comments:
+const api: Promise<WP_REST_API_Comment[]> = wp.apiFetch( {
+	path: '/wp/v2/comments/',
+} );
 ```
 
 ## FAQs
