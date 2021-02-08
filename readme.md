@@ -126,9 +126,9 @@ printf(
 );
 ```
 
-The REST API object definitions apply to the object (or array of objects) you get in response to a REST API request. They are especially useful when using `apiFetch()`.
+The REST API object definitions apply to each of the objects you get in response to a REST API request, for example when using `apiFetch()`.
 
-The definitions also apply outside of the browser of course, for example if you're saving data as JSON and reading it in a Node application.
+The definitions also apply outside of the browser, for example if you're saving data as JSON and reading it in a Node application.
 
 ### How do I know these definitions are valid?
 
