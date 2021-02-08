@@ -22,7 +22,7 @@
     "typescript": ">=3"
   },
   "devDependencies": {
-    "wp-json-schemas": "^1.6.0",
+    "wp-json-schemas": "^1.7.0",
     "json-schema-to-typescript": "^9.1.0"
   },
   "scripts": {

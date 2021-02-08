@@ -16,6 +16,7 @@ This means when you're working with JSON representations of PHP objects from Wor
 * `WP_Term`
 * `WP_User`
 * `WP_Comment`
+* `WP_Site`
 * `WP_Post_Type`
 * `WP_Error`, plus:
   - `WP_Error_With_Error`

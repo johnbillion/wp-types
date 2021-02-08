@@ -28,6 +28,7 @@ export interface WP {
   Error_Without_Error?: WP_Error_Without_Error;
   Post?: WP_Post;
   Post_Type?: WP_Post_Type;
+  Site?: WP_Site;
   Term?: WP_Term;
   User?: WP_User;
   REST_API?: {
@@ -92,7 +93,7 @@ export interface WP_Comment {
   /**
    * Comment approval status.
    */
-  comment_approved: string;
+  comment_approved: "0" | "1" | "spam" | "trash";
   /**
    * Comment author HTTP user agent.
    */
@@ -505,6 +506,77 @@ export interface WP_Post_Type_Rewrite {
    */
   ep_mask?: number;
   [k: string]: unknown;
+}
+/**
+ * Core class used for interacting with a multisite site.
+ */
+export interface WP_Site {
+  /**
+   * Site ID.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  blog_id: string;
+  /**
+   * Domain of the site.
+   */
+  domain: string;
+  /**
+   * Path of the site.
+   */
+  path: string;
+  /**
+   * The ID of the site's parent network.
+   *
+   * Named "site" vs. "network" for legacy reasons. An individual site's "site" is its network.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  site_id: string;
+  /**
+   * The date on which the site was created or registered.
+   */
+  registered: WP_Date_Time;
+  /**
+   * The date and time on which site settings were last updated.
+   */
+  last_updated: WP_Date_Time;
+  /**
+   * Whether the site should be treated as public.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  public: "0" | "1";
+  /**
+   * Whether the site should be treated as archived.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  archived: "0" | "1";
+  /**
+   * Whether the site should be treated as mature.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  mature: "0" | "1";
+  /**
+   * Whether the site should be treated as spam.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  spam: "0" | "1";
+  /**
+   * Whether the site should be treated as deleted.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  deleted: "0" | "1";
+  /**
+   * The language pack associated with this site.
+   *
+   * A numeric string, for compatibility reasons.
+   */
+  lang_id: string;
 }
 /**
  * Core class used to implement the WP_Term object.
