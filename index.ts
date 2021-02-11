@@ -280,7 +280,7 @@ export interface WP_Post {
   /**
    * Stores the post object's sanitization level.
    */
-  filter: WP_Object_Filter_Context;
+  filter: WP_Object_Filter_Context | null;
 }
 /**
  * Core class used for interacting with post types.
@@ -823,7 +823,7 @@ export interface WP_Term {
   /**
    * Stores the term object's sanitization level.
    */
-  filter: WP_Object_Filter_Context;
+  filter: WP_Object_Filter_Context | null;
 }
 /**
  * Core class used to implement the WP_User object.
@@ -854,7 +854,7 @@ export interface WP_User {
   /**
    * The filter context applied to user data fields.
    */
-  filter: WP_Object_Filter_Context;
+  filter: WP_Object_Filter_Context | null;
   /**
    * The roles the user is part of.
    */
