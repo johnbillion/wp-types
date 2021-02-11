@@ -29,6 +29,7 @@ export interface WP {
   Post?: WP_Post;
   Post_Type?: WP_Post_Type;
   Site?: WP_Site;
+  Taxonomy?: WP_Taxonomy;
   Term?: WP_Term;
   User?: WP_User;
   REST_API?: {
@@ -101,7 +102,7 @@ export interface WP_Comment {
   /**
    * Comment type.
    */
-  comment_type: string;
+  comment_type: WP_Comment_Type_Name | string;
   /**
    * Parent comment ID.
    *
@@ -118,8 +119,7 @@ export interface WP_Comment {
 /**
  * WordPress Error class.
  *
- * Container for checking for WordPress errors and error messages. Many
- * core WordPress functions pass this class in the event of an error.
+ * Container for checking for WordPress errors and error messages. Many core WordPress functions pass this class in the event of an error.
  */
 export interface WP_Error {
   /**
@@ -134,8 +134,7 @@ export interface WP_Error {
 /**
  * The messages for the errors contained within the error object.
  *
- * Each error is represented by a property keyed by the error code, and containing an array of message strings for that
- * code. Any given error code usually contains only one message, but can contain more.
+ * Each error is represented by a property keyed by the error code, and containing an array of message strings for that code. Any given error code usually contains only one message, but can contain more.
  */
 export interface WP_Error_Messages {
   [k: string]: string[];
@@ -143,8 +142,7 @@ export interface WP_Error_Messages {
 /**
  * The data for the errors contained within the error object.
  *
- * Each error is represented by a property keyed by the error code, and containing error data for that code. Any given
- * error code can contain only one piece of error data, but the data can be of any type.
+ * Each error is represented by a property keyed by the error code, and containing error data for that code. Any given error code can contain only one piece of error data, but the data can be of any type.
  */
 export interface WP_Error_Data {
   [k: string]: any;
@@ -220,11 +218,11 @@ export interface WP_Post {
   /**
    * Whether comments are allowed.
    */
-  comment_status: string;
+  comment_status: WP_Post_Comment_Status_Name;
   /**
    * Whether pings are allowed.
    */
-  ping_status: string;
+  ping_status: WP_Post_Comment_Status_Name;
   /**
    * The post's password in plain text.
    */
@@ -252,7 +250,7 @@ export interface WP_Post {
   /**
    * A utility DB field for post content.
    */
-  post_content_filtered: "" | string;
+  post_content_filtered: string;
   /**
    * ID of a post's parent post.
    */
@@ -340,7 +338,7 @@ export interface WP_Post_Type {
   /**
    * The URL or reference to the icon to be used for this menu. Can include a URL, a base64-encoded SVG using a data URI, the name of a Dashicons helper class, or 'none'.
    */
-  menu_icon: string;
+  menu_icon: string | "none";
   /**
    * The string to use to build the read, edit, and delete capabilities.
    */
@@ -398,7 +396,7 @@ export interface WP_Post_Type {
   /**
    * Triggers the handling of rewrites for this post type.
    */
-  rewrite: boolean | WP_Post_Type_Rewrite;
+  rewrite: WP_Post_Type_Rewrite | boolean;
   /**
    * The features supported by the post type.
    */
@@ -488,23 +486,23 @@ export interface WP_Post_Type_Rewrite {
   /**
    * Customize the permastruct slug.
    */
-  slug?: string;
+  slug: string;
   /**
    * Whether the permastruct should be prepended with WP_Rewrite::$front.
    */
-  with_front?: boolean;
+  with_front: boolean;
   /**
    * Whether the feed permastruct should be built for this post type.
    */
-  feeds?: boolean;
+  feeds: boolean;
   /**
    * Whether the permastruct should provide for pagination.
    */
-  pages?: boolean;
+  pages: boolean;
   /**
    * Endpoint mask to assign.
    */
-  ep_mask?: number;
+  ep_mask: number;
   [k: string]: unknown;
 }
 /**
@@ -577,6 +575,210 @@ export interface WP_Site {
    * A numeric string, for compatibility reasons.
    */
   lang_id: string;
+}
+/**
+ * Core class used for interacting with taxonomies.
+ */
+export interface WP_Taxonomy {
+  /**
+   * Taxonomy key.
+   */
+  name: WP_Taxonomy_Name | string;
+  /**
+   * Name of the taxonomy shown in the menu. Usually plural.
+   */
+  label: string;
+  labels: WP_Taxonomy_Labels;
+  /**
+   * A short descriptive summary of what the taxonomy is for.
+   */
+  description: string;
+  /**
+   * Whether a taxonomy is intended for use publicly either via the admin interface or by front-end users.
+   */
+  public: boolean;
+  /**
+   * Whether the taxonomy is publicly queryable.
+   */
+  publicly_queryable: boolean;
+  /**
+   * Whether the taxonomy is hierarchical.
+   */
+  hierarchical: boolean;
+  /**
+   * Whether to generate and allow a UI for managing terms in this taxonomy in the admin.
+   */
+  show_ui: boolean;
+  /**
+   * Whether to show the taxonomy in the admin menu.
+   */
+  show_in_menu: boolean;
+  /**
+   * Whether the taxonomy is available for selection in navigation menus.
+   */
+  show_in_nav_menus: boolean;
+  /**
+   * Whether to list the taxonomy in the tag cloud widget controls.
+   */
+  show_tagcloud: boolean;
+  /**
+   * Whether to show the taxonomy in the quick/bulk edit panel.
+   */
+  show_in_quick_edit: boolean;
+  /**
+   * Whether to display a column for the taxonomy on its post type listing screens.
+   */
+  show_admin_column: boolean;
+  /**
+   * The callback function for the meta box display.
+   */
+  meta_box_cb:
+    | boolean
+    | {
+        [k: string]: unknown;
+      }
+    | string;
+  /**
+   * The callback function for sanitizing taxonomy data saved from a meta box.
+   */
+  meta_box_sanitize_cb:
+    | boolean
+    | {
+        [k: string]: unknown;
+      }
+    | string;
+  /**
+   * An array of object types this taxonomy is registered for.
+   */
+  object_type: (WP_Post_Type_Name | string)[];
+  cap: WP_Taxonomy_Caps;
+  /**
+   * Rewrites information for this taxonomy.
+   */
+  rewrite: WP_Taxonomy_Rewrite | boolean;
+  /**
+   * Query var string for this taxonomy.
+   */
+  query_var: string | boolean;
+  /**
+   * Function that will be called when the count is updated.
+   */
+  update_count_callback:
+    | boolean
+    | {
+        [k: string]: unknown;
+      }
+    | string;
+  /**
+   * Whether this taxonomy should appear in the REST API.
+   *
+   * Default false. If true, standard endpoints will be registered with respect to $rest_base and $rest_controller_class.
+   */
+  show_in_rest: boolean;
+  /**
+   * The base path for this taxonomy's REST API endpoints.
+   */
+  rest_base: string | boolean;
+  /**
+   * The controller for this taxonomy's REST API endpoints.
+   *
+   * Custom controllers must extend WP_REST_Controller.
+   */
+  rest_controller_class: string | false;
+  /**
+   * The controller instance for this taxonomy's REST API endpoints.
+   *
+   * Lazily computed. Should be accessed using {@see WP_Taxonomy::get_rest_controller()}.
+   */
+  rest_controller: null;
+  /**
+   * The default term name for this taxonomy. If you pass an array you have to set 'name' and optionally 'slug' and 'description'.
+   */
+  default_term:
+    | {
+        name: string;
+        slug?: string;
+        description?: string;
+      }
+    | string
+    | null;
+  /**
+   * Whether terms in this taxonomy should be sorted in the order they are provided to `wp_set_object_terms()`.
+   *
+   * Use this in combination with `'orderby' => 'term_order'` when fetching terms.
+   */
+  sort: boolean | null;
+  /**
+   * Array of arguments to automatically use inside `wp_get_object_terms()` for this taxonomy.
+   */
+  args: {
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Whether it is a built-in taxonomy.
+   */
+  _builtin: boolean;
+}
+/**
+ * Labels object for this taxonomy.
+ */
+export interface WP_Taxonomy_Labels {
+  name: string;
+  singular_name: string;
+  search_items: string;
+  popular_items: string;
+  all_items: string;
+  parent_item: string;
+  parent_item_colon: string;
+  edit_item: string;
+  view_item: string;
+  update_item: string;
+  add_new_item: string;
+  new_item_name: string;
+  separate_items_with_commas: string;
+  add_or_remove_items: string;
+  choose_from_most_used: string;
+  not_found: string;
+  no_terms: string;
+  filter_by_item: string;
+  items_list_navigation: string;
+  items_list: string;
+  most_used: string;
+  back_to_items: string;
+  menu_name: string;
+  name_admin_bar: string;
+  [k: string]: string;
+}
+/**
+ * Capabilities for this taxonomy.
+ */
+export interface WP_Taxonomy_Caps {
+  manage_terms: WP_User_Cap_Name;
+  edit_terms: WP_User_Cap_Name;
+  delete_terms: WP_User_Cap_Name;
+  assign_terms: WP_User_Cap_Name;
+}
+/**
+ * Taxonomy rewrite rule definition.
+ */
+export interface WP_Taxonomy_Rewrite {
+  /**
+   * Should the permastruct be prepended with WP_Rewrite::$front.
+   */
+  with_front: boolean;
+  /**
+   * Either hierarchical rewrite tag or not.
+   */
+  hierarchical: boolean;
+  /**
+   * Assign an endpoint mask.
+   */
+  ep_mask: number;
+  /**
+   * Customize the permastruct slug.
+   */
+  slug: string;
+  [k: string]: unknown;
 }
 /**
  * Core class used to implement the WP_Term object.
@@ -1386,6 +1588,11 @@ export interface WP_REST_API_Error {
   additional_errors?: WP_REST_API_Error[];
 }
 
+export const enum WP_Comment_Type_Name {
+  comment = "comment",
+  pingback = "pingback",
+  trackback = "trackback",
+}
 export const enum WP_Post_Status_Name {
   publish = "publish",
   draft = "draft",
@@ -1395,6 +1602,10 @@ export const enum WP_Post_Status_Name {
   future = "future",
   trash = "trash",
   private = "private",
+}
+export const enum WP_Post_Comment_Status_Name {
+  open = "open",
+  closed = "closed",
 }
 export const enum WP_Post_Type_Name {
   post = "post",
@@ -1435,15 +1646,6 @@ export const enum WP_Comment_Status_Name {
   unapproved = "unapproved",
   spam = "spam",
   trash = "trash",
-}
-export const enum WP_Comment_Type_Name {
-  comment = "comment",
-  pingback = "pingback",
-  trackback = "trackback",
-}
-export const enum WP_Post_Comment_Status_Name {
-  open = "open",
-  closed = "closed",
 }
 export const enum WP_Post_Format_Name {
   aside = "aside",

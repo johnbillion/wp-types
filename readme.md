@@ -2,8 +2,8 @@
 
 This package provides well-documented TypeScript definitions that describe the shape of:
 
-* WordPress core PHP objects such as `WP_Error`, `WP_Post`, and `WP_User`
-* WordPress REST API responses such as those from `/wp/v2/posts` and `/wp/v2/users`
+* WordPress core PHP objects such as `WP_Post`, `WP_Term`, and `WP_User`
+* WordPress REST API responses such as those from `/wp/v2/posts`, `/wp/v2/categories`, and `/wp/v2/users`
 * The allowed values for several of the properties of both
 
 This means when you're working with JSON representations of PHP objects from WordPress, or working with items from a REST API response, you can add types for your data and then get definitions for their properties and nice documentation in your code editor.
@@ -17,6 +17,7 @@ This means when you're working with JSON representations of PHP objects from Wor
 * `WP_User`
 * `WP_Comment`
 * `WP_Site`
+* `WP_Taxonomy`
 * `WP_Post_Type`
 * `WP_Error`, plus:
   - `WP_Error_With_Error`
@@ -33,20 +34,23 @@ This means when you're working with JSON representations of PHP objects from Wor
 
 ### Properties
 
-Interfaces are used for the structure of some object properties:
+Interfaces are used for the structure of several object properties:
 
 * `WP_Error_Data`
 * `WP_Error_Messages`
 * `WP_Post_Type_Caps`
 * `WP_Post_Type_Labels`
 * `WP_Post_Type_Rewrite`
+* `WP_Taxonomy_Caps`
+* `WP_Taxonomy_Labels`
+* `WP_Taxonomy_Rewrite`
 * `WP_User_Cap_Name`
 * `WP_User_Caps`
 * `WP_User_Data`
 
 ### Enums
 
-String enums are used for values of some object properties:
+String enums are used for values of several object properties:
 
 * `WP_Comment_Status_Name`
 * `WP_Comment_Type_Name`
