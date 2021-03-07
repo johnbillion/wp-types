@@ -141,7 +141,7 @@ The definitions also apply outside of the browser, for example if you're saving 
 
 ### How do I know these definitions are valid?
 
-They're generated directly from [the `wp-json-schemas` package](https://www.npmjs.com/package/wp-json-schemas), which is itself tested using output from WordPress core.
+They're generated directly from [the `wp-json-schemas` package](https://github.com/johnbillion/wp-json-schemas), which is itself tested using output from WordPress core.
 
 If you'd like to contribute to these definitions, please contribute upstream to the `wp-json-schemas` package. Thanks!
 
