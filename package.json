@@ -26,6 +26,7 @@
     "json-schema-to-typescript": "^9.1.0"
   },
   "scripts": {
+    "test": "tsc tests/test.ts --noEmit --strict",
     "generate": "json2ts -i node_modules/wp-json-schemas/schema.json -o index.ts --cwd=node_modules/wp-json-schemas --style.trailingComma=all"
   }
 }
