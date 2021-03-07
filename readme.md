@@ -1,12 +1,12 @@
+[![NPM](https://img.shields.io/badge/npm-wp--types-9966ff.svg?style=flat-square)](https://www.npmjs.com/package/wp-types)
+
 # WordPress TypeScript Definitions
 
 This package provides well-documented TypeScript definitions that describe the shape of:
 
-* WordPress core PHP objects such as `WP_Post`, `WP_Term`, and `WP_User`
-* WordPress REST API responses such as those from `/wp/v2/posts`, `/wp/v2/categories`, and `/wp/v2/users`
-* The allowed values for several of the properties of both
-
-This means when you're working with JSON representations of PHP objects from WordPress, or working with items from a REST API response, you can add types for your data and then get definitions for their properties and nice documentation in your code editor.
+* WordPress PHP objects such as `WP_Post`, `WP_Term`, and `WP_User`
+* WordPress REST API responses such as from `/wp/v2/posts` and `/wp/v2/users`
+* Allowed values for several of their properties
 
 ## What's included?
 
@@ -34,7 +34,7 @@ This means when you're working with JSON representations of PHP objects from Wor
 
 ### Properties
 
-Interfaces are used for the structure of several object properties:
+Interfaces are used for the structure of several properties:
 
 * `WP_Error_Data`
 * `WP_Error_Messages`
@@ -50,7 +50,7 @@ Interfaces are used for the structure of several object properties:
 
 ### Enums
 
-String enums are used for values of several object properties:
+String enums are used for values of several properties:
 
 * `WP_Comment_Status_Name`
 * `WP_Comment_Type_Name`
@@ -115,13 +115,18 @@ const api: Promise<WP_REST_API_Comment[]> = wp.apiFetch( {
 const api: Promise<WP_REST_API_Media[]> = wp.apiFetch( {
 	path: '/wp/v2/media/',
 } );
+
+// Errors from any of the above:
+api.catch( ( error: WP_REST_API_Error ) => {
+	alert( error.message );
+} );
 ```
 
 ## FAQs
 
 ### When do these definitions apply?
 
-The core object definitions apply whenever a supported PHP object is represented as JSON. How you do that depends on your application, but here is an example:
+The PHP object definitions apply whenever a supported PHP object is represented as JSON. How you do that depends on your application, but here is an example:
 
 ```php
 printf(
@@ -146,6 +151,7 @@ Yes, but:
 
 * You might need `preserveConstEnums` enabled in your TypeScript config
 * You should import enums as you would a regular module, not as a `type`
+* You cannot iterate enums (this is a TypeScript restriction)
 
 Example:
 
