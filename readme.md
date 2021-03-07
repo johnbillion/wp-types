@@ -2,4 +2,4 @@
 
 # WordPress TypeScript Definitions
 
-[The source code for the `wp-types` package has moved to the `wp-json-schemas` repo](https://github.com/johnbillion/wp-json-schemas).
+[The source code for the `wp-types` package has moved to the `wp-json-schemas` repo](https://github.com/johnbillion/wp-json-schemas/tree/trunk/packages/wp-types).
